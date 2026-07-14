@@ -1,0 +1,998 @@
+<!doctype html>
+<html lang="id" data-bs-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portofolio Akbar Riansyah, mahasiswa D4 Teknologi Rekayasa Perangkat Lunak dan full-stack developer.">
+  <title>Akbar Riansyah — Portfolio</title>
+
+  <!-- Bootstrap 5.3.8 -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+    crossorigin="anonymous"
+  >
+  
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+    }
+
+    :root {
+      --bs-primary: #8b5cf6;
+      --bs-primary-rgb: 139, 92, 246;
+      --bs-link-color: #a78bfa;
+      --bs-link-hover-color: #c4b5fd;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 76px;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 12% 10%, rgba(139, 92, 246, .16), transparent 28rem),
+        radial-gradient(circle at 88% 35%, rgba(14, 165, 233, .12), transparent 30rem),
+        #09090b;
+    }
+
+    .glass {
+      background: rgba(24, 24, 27, .72);
+      border: 1px solid rgba(255, 255, 255, .10);
+      backdrop-filter: blur(14px);
+    }
+
+    .navbar {
+      background: rgba(9, 9, 11, .82);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 7rem;
+      padding-bottom: 4rem;
+    }
+
+    .eyebrow {
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      font-size: .78rem;
+    }
+
+    .display-title {
+      font-size: clamp(3.2rem, 9vw, 7.8rem);
+      line-height: .9;
+      letter-spacing: -.065em;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #ffffff 0%, #c4b5fd 45%, #7dd3fc 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .profile-panel {
+      min-height: 500px;
+      overflow: hidden;
+      position: relative;
+      background: #18181b;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .profile-panel::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        145deg,
+        rgba(139, 92, 246, .45) 0%,
+        rgba(139, 92, 246, .25) 25%,
+        rgba(14, 165, 233, .15) 60%,
+        rgba(14, 165, 233, .08) 100%
+      );
+      z-index: 2;
+      pointer-events: none;
+      transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .profile-panel:hover::before {
+      opacity: 0.15;
+    }
+
+    .profile-panel::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60%;
+      background: linear-gradient(
+        to top,
+        rgba(9, 9, 11, .95) 0%,
+        rgba(9, 9, 11, .75) 40%,
+        transparent 100%
+      );
+      z-index: 3;
+      pointer-events: none;
+      transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .profile-panel:hover::after {
+      opacity: 0.5;
+    }
+
+    .monogram {
+      font-size: clamp(7rem, 18vw, 13rem);
+      line-height: 1;
+      letter-spacing: -.08em;
+      position: relative;
+      z-index: 1;
+      transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .profile-panel:hover .monogram {
+      opacity: 0.25;
+    }
+
+    .profile-panel img {
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .profile-panel:hover img {
+      transform: scale(1.05);
+      filter: brightness(1.1) contrast(1.05);
+    }
+
+    .section-space {
+      padding: 7rem 0;
+    }
+
+    .section-number {
+      color: #a78bfa;
+      font-family: var(--bs-font-monospace);
+      font-size: .95rem;
+    }
+
+    .section-title {
+      font-size: clamp(2.25rem, 5vw, 4.25rem);
+      letter-spacing: -.045em;
+    }
+
+    .project-card {
+      transition: transform .4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .project-card:hover {
+      transform: translateY(-12px);
+    }
+
+    .project-card:hover .project-preview {
+      border-color: rgba(167, 139, 250, .35);
+    }
+
+    .project-card:hover .card-body {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .project-preview {
+      min-height: 280px;
+      background:
+        linear-gradient(135deg, rgba(139, 92, 246, .32), rgba(14, 165, 233, .10)),
+        #27272a;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+      transition: border-color .4s ease;
+    }
+
+    .project-preview-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all .6s cubic-bezier(0.4, 0, 0.2, 1);
+      filter: brightness(0.85) saturate(1.1);
+    }
+
+    .project-card:hover .project-preview-img {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .project-card .card-body {
+      transition: all .5s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateY(15px);
+      opacity: 0.7;
+    }
+
+    .project-preview.alt {
+      background:
+        linear-gradient(135deg, rgba(16, 185, 129, .24), rgba(14, 165, 233, .12)),
+        #27272a;
+    }
+
+    .project-preview.warm {
+      background:
+        linear-gradient(135deg, rgba(249, 115, 22, .24), rgba(139, 92, 246, .15)),
+        #27272a;
+    }
+
+    .project-preview.blue {
+      background:
+        linear-gradient(135deg, rgba(59, 130, 246, .28), rgba(34, 211, 238, .10)),
+        #27272a;
+    }
+
+    .timeline {
+      border-left: 1px solid rgba(255, 255, 255, .16);
+    }
+
+    .timeline-item {
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: calc(-1.5rem - 5px);
+      top: .45rem;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #a78bfa;
+      box-shadow: 0 0 0 6px rgba(139, 92, 246, .15);
+    }
+
+    .skill-badge {
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .04);
+      position: relative;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .skill-badge:hover {
+      transform: translateY(-3px);
+      border-color: rgba(167, 139, 250, .45);
+      box-shadow: 0 8px 24px rgba(139, 92, 246, .25);
+    }
+
+    .skill-badge .tech-text {
+      transition: opacity 0.3s ease;
+    }
+
+    .skill-badge .tech-icon {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 24px;
+      height: 24px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .skill-badge:hover .tech-icon {
+      display: block;
+      opacity: 1;
+      animation: iconPop 0.3s ease;
+    }
+
+    .skill-badge:hover .tech-text {
+      opacity: 0;
+    }
+
+    @keyframes iconPop {
+      0% { transform: translate(-50%, -50%) scale(0.5); }
+      100% { transform: translate(-50%, -50%) scale(1); }
+    }
+
+    /* Typed.js cursor customization */
+    .typed-cursor {
+      color: var(--bs-primary);
+      font-weight: 400;
+      animation: cursorBlink 1s infinite;
+    }
+
+    @keyframes cursorBlink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    .contact-box {
+      background:
+        linear-gradient(130deg, rgba(139, 92, 246, .24), rgba(14, 165, 233, .08)),
+        rgba(24, 24, 27, .78);
+    }
+
+    .text-soft {
+      color: #a1a1aa;
+    }
+
+    .border-soft {
+      border-color: rgba(255, 255, 255, .10) !important;
+    }
+
+    @media (max-width: 991.98px) {
+      .hero {
+        min-height: auto;
+      }
+
+      .profile-panel {
+        min-height: 390px;
+      }
+
+      .section-space {
+        padding: 5rem 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container py-2">
+      <a class="navbar-brand fw-bold" href="#home">AKBAR<span class="text-primary">.</span></a>
+
+      <button
+        class="navbar-toggler border-0 shadow-none"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#mainNavbar"
+        aria-controls="mainNavbar"
+        aria-expanded="false"
+        aria-label="Buka navigasi"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="mainNavbar">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="#about">Tentang</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Proyek</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experience">Pengalaman</a></li>
+          <li class="nav-item"><a class="nav-link" href="#education">Pendidikan</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Keahlian</a></li>
+          <li class="nav-item ms-lg-2">
+            <a class="btn btn-primary rounded-pill px-4" href="#contact">Hubungi Saya</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero -->
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-7">
+            <div class="d-inline-flex align-items-center gap-2 glass rounded-pill px-3 py-2 mb-4" data-aos="fade-down">
+              <span class="badge rounded-pill text-bg-success">Available</span>
+              <span class="small text-soft">Terbuka untuk proyek dan kolaborasi</span>
+            </div>
+
+            <p class="eyebrow text-primary fw-semibold mb-3" data-aos="fade-right">Full-Stack Developer · Product Builder</p>
+
+            <h1 class="fw-bold mb-4" data-aos="fade-up" style="font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1; letter-spacing: -0.03em;">
+              Saya membuat<br>
+              <span class="gradient-text" id="typed-text"></span><br>
+              yang berguna.
+            </h1>
+
+            <p class="lead text-soft col-xl-10 mb-4" data-aos="fade-up" data-aos-delay="100">
+              Halo, saya <strong class="text-white">Akbar Riansyah</strong>. Mahasiswa D4 Teknologi
+              Rekayasa Perangkat Lunak yang tertarik pada pengembangan web, aplikasi,
+              kecerdasan buatan, dan Internet of Things.
+            </p>
+
+            <div class="d-flex flex-wrap gap-3" data-aos="fade-up" data-aos-delay="200">
+              <a href="#projects" class="btn btn-primary btn-lg rounded-pill px-4">Lihat Proyek</a>
+              <a href="mailto:akbarriansyah339@gmail.com" class="btn btn-outline-light btn-lg rounded-pill px-4">
+                Kirim Email
+              </a>
+            </div>
+
+            <div class="row g-3 mt-5" data-aos="fade-up" data-aos-delay="300">
+              <div class="col-4">
+                <div class="border-start border-primary border-3 ps-3">
+                  <div class="fs-3 fw-bold">4+</div>
+                  <div class="small text-soft">Proyek utama</div>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="border-start border-primary border-3 ps-3">
+                  <div class="fs-3 fw-bold">10+</div>
+                  <div class="small text-soft">Teknologi</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="profile-panel glass rounded-5 shadow-lg position-relative d-flex flex-column justify-content-between p-4" data-aos="fade-left" data-aos-delay="200" style="min-height: 540px;">
+              <!-- Background Image -->
+              <img 
+                src="assets/imgs/gwe.JPG" 
+                alt="Akbar Riansyah"
+                class="position-absolute top-0 start-0 w-100 h-100 object-fit-cover rounded-5"
+                style="object-position: center; z-index: 1;"
+              >
+
+              <!-- Top Section -->
+              <div class="d-flex justify-content-between align-items-center position-relative" style="z-index: 4;">
+                <span class="small font-monospace text-white" style="opacity: 0.75;">PORTFOLIO / 2026</span>
+                <span class="badge rounded-pill bg-white text-dark fw-semibold">Medan, ID</span>
+              </div>
+
+              <!-- Center Monogram -->
+              <div class="monogram fw-black text-center position-relative" style="z-index: 4; margin: auto 0;">
+                <span class="gradient-text" style="opacity: 0.85;"></span>
+              </div>
+
+              <!-- Bottom Section -->
+              <div class="position-relative" style="z-index: 4;">
+                <div class="h4 fw-bold mb-1 text-white">Akbar Riansyah</div>
+                <p class="mb-0 text-white" style="opacity: 0.85;">Designing ideas. Building systems. Solving problems.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section-space border-top border-soft">
+      <div class="container">
+        <div class="row g-5">
+          <div class="col-lg-4" data-aos="fade-right">
+            <span class="section-number">01 / TENTANG</span>
+            <h2 class="section-title fw-bold mt-3">Bukan sekadar menulis kode.</h2>
+          </div>
+
+          <div class="col-lg-8">
+            <p class="fs-3 fw-light lh-base mb-4" data-aos="fade-up">
+              Saya senang mengubah masalah nyata menjadi produk yang sederhana,
+              cepat dipahami, dan benar-benar dapat digunakan.
+            </p>
+
+            <div class="row g-4 text-soft" data-aos="fade-up" data-aos-delay="100">
+              <div class="col-md-6">
+                <p>
+                  Fokus utama saya adalah pengembangan aplikasi web dan mobile,
+                  mulai dari merancang antarmuka, menyusun alur bisnis, membangun
+                  backend, hingga menyiapkan produk agar dapat digunakan pengguna.
+                </p>
+              </div>
+              <div class="col-md-6">
+                <p>
+                  Saya juga mengeksplorasi AI, computer vision, IoT, serta solusi
+                  digital untuk UMKM dan pendidikan. Saya percaya teknologi yang
+                  baik bukan yang paling rumit, melainkan yang paling membantu.
+                </p>
+              </div>
+            </div>
+
+            <div class="row g-3 mt-3" data-aos="fade-up" data-aos-delay="200">
+              <div class="col-md-4">
+                <div class="glass rounded-4 p-4 h-100">
+                  <div class="h5">01. Product Thinking</div>
+                  <p class="small text-soft mb-0">Memahami kebutuhan sebelum menentukan fitur.</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="glass rounded-4 p-4 h-100">
+                  <div class="h5">02. Clean Interface</div>
+                  <p class="small text-soft mb-0">Membuat tampilan yang jelas, modern, dan responsif.</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="glass rounded-4 p-4 h-100">
+                  <div class="h5">03. Real Solution</div>
+                  <p class="small text-soft mb-0">Mengutamakan fungsi yang menyelesaikan masalah nyata.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="section-space bg-body-tertiary border-top border-soft">
+      <div class="container">
+        <div class="d-lg-flex align-items-end justify-content-between mb-5">
+          <div data-aos="fade-right">
+            <span class="section-number">02 / PROYEK PILIHAN</span>
+            <h2 class="section-title fw-bold mt-3 mb-0">Yang sedang saya bangun.</h2>
+          </div>
+          <p class="text-soft col-lg-4 mt-3 mt-lg-0 mb-0" data-aos="fade-left">
+            Beberapa produk yang berangkat dari kebutuhan pengguna dan eksplorasi teknologi.
+          </p>
+        </div>
+
+        <div class="row g-4">
+          <!-- Project 1 -->
+          <div class="col-lg-6">
+            <article class="card project-card glass rounded-5 overflow-hidden h-100" data-aos="fade-up" data-aos-delay="0">
+              <div class="project-preview d-flex align-items-center justify-content-center">
+                <img 
+                  src="assets/imgs/AKURA.png" 
+                  alt="Screenshot AKURA"
+                  class="project-preview-img"
+                >
+              </div>
+              <div class="card-body p-4 p-lg-5">
+                <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+                  <div>
+                    <span class="badge rounded-pill text-bg-primary mb-3">Featured</span>
+                    <h3 class="h2 fw-bold">AKURA</h3>
+                  </div>
+                  <span class="text-soft font-monospace">01</span>
+                </div>
+                <p class="text-soft">
+                  Sistem kasir dan manajemen usaha offline-first untuk warung,
+                  laundry, kios, dan UMKM dengan perangkat sederhana.
+                </p>
+                <div class="d-flex flex-wrap gap-2">
+                  <span class="badge skill-badge rounded-pill px-3 py-2">Flutter</span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">React</span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">Firebase</span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">IndexedDB</span>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="col-lg-6">
+            <article class="card project-card glass rounded-5 overflow-hidden h-100" data-aos="fade-up" data-aos-delay="100">
+              <div class="project-preview alt d-flex align-items-center justify-content-center">
+                <img 
+                  src="assets/imgs/EduTrack.png" 
+                  alt="Screenshot EduTrack"
+                  class="project-preview-img"
+                >
+              </div>
+              <div class="card-body p-4 p-lg-5">
+                <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+                  <div>
+                    <span class="badge rounded-pill text-bg-success mb-3">Education</span>
+                    <h3 class="h2 fw-bold">EduTrack</h3>
+                  </div>
+                  <span class="text-soft font-monospace">02</span>
+                </div>
+                <p class="text-soft">
+                  Aplikasi logbook guru untuk mencatat kegiatan harian, memantau
+                  laporan yang terlewat, dan membantu pengawasan akademik.
+                </p>
+                <div class="d-flex flex-wrap gap-2">
+                  <span class="badge skill-badge rounded-pill px-3 py-2">Laravel</span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">MySQL</span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">REST API</span>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="col-lg-6">
+            <article class="card project-card glass rounded-5 overflow-hidden h-100" data-aos="fade-up" data-aos-delay="200">
+              <div class="project-preview warm d-flex align-items-center justify-content-center">
+                <img 
+                  src="assets/imgs/AIPrediksiFPS.png" 
+                  alt="Screenshot AI Prediksi FPS"
+                  class="project-preview-img"
+                >
+              </div>
+              <div class="card-body p-4 p-lg-5">
+                <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+                  <div>
+                    <span class="badge rounded-pill text-bg-warning mb-3">Machine Learning</span>
+                    <h3 class="h2 fw-bold">AI Prediksi FPS</h3>
+                  </div>
+                  <span class="text-soft font-monospace">03</span>
+                </div>
+                <p class="text-soft">
+                  Eksperimen model machine learning untuk memperkirakan performa
+                  gim berdasarkan kombinasi spesifikasi CPU dan GPU.
+                </p>
+                <div class="d-flex flex-wrap gap-2">
+                  <span class="badge skill-badge rounded-pill px-3 py-2">Python</span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">Scikit-learn</span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">TensorFlow.js</span>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Project 4 -->
+          <div class="col-lg-6">
+            <article class="card project-card glass rounded-5 overflow-hidden h-100" data-aos="fade-up" data-aos-delay="300">
+              <div class="project-preview blue d-flex align-items-center justify-content-center">
+                <img 
+                  src="assets/imgs/SmartGarden.png" 
+                  alt="Screenshot Smart Garden"
+                  class="project-preview-img"
+                >
+              </div>
+              <div class="card-body p-4 p-lg-5">
+                <div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+                  <div>
+                    <span class="badge rounded-pill text-bg-info mb-3">Internet of Things</span>
+                    <h3 class="h2 fw-bold">Smart Garden</h3>
+                  </div>
+                  <span class="text-soft font-monospace">04</span>
+                </div>
+                <p class="text-soft">
+                  Sistem pemantauan tanaman berbasis ESP32 dengan sensor lingkungan,
+                  otomasi, dan konsep sumber daya tenaga surya.
+                </p>
+                <div class="d-flex flex-wrap gap-2">
+                  <span class="badge skill-badge rounded-pill px-3 py-2">ESP32</span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">MicroPython</span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">Sensors</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="section-space border-top border-soft">
+      <div class="container">
+        <div class="row g-5">
+          <div class="col-lg-4" data-aos="fade-right">
+            <span class="section-number">03 / PERJALANAN</span>
+            <h2 class="section-title fw-bold mt-3">Belajar dari pengalaman nyata.</h2>
+          </div>
+
+          <div class="col-lg-8">
+            <div class="timeline ps-4" data-aos="fade-up">
+              <div class="timeline-item pb-5">
+                <div class="d-md-flex justify-content-between gap-4">
+                  <div>
+                    <h3 class="h4 fw-bold mb-2">D4 Teknologi Rekayasa Perangkat Lunak</h3>
+                    <p class="text-primary mb-2">Politeknik Wilmar Bisnis Indonesia</p>
+                    <p class="text-soft mb-0">
+                      Mempelajari rekayasa perangkat lunak, algoritma, pengembangan web,
+                      analisis sistem, desain produk, dan kewirausahaan teknologi.
+                    </p>
+                  </div>
+                  <span class="small font-monospace text-soft flex-shrink-0 mt-2 mt-md-0">2025 — SEKARANG</span>
+                </div>
+              </div>
+
+              <div class="timeline-item pb-5">
+                <div class="d-md-flex justify-content-between gap-4">
+                  <div>
+                    <h3 class="h4 fw-bold mb-2">Medallion for Excellence</h3>
+                    <p class="text-primary mb-2">LKS Nasional — IT Software Solutions for Business</p>
+                    <p class="text-soft mb-0">
+                      Mengembangkan kemampuan problem solving, analisis kebutuhan,
+                      perancangan database, dan pembangunan aplikasi dalam tekanan waktu.
+                    </p>
+                  </div>
+                  <span class="small font-monospace text-soft flex-shrink-0 mt-2 mt-md-0">2024</span>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="d-md-flex justify-content-between gap-4">
+                  <div>
+                    <h3 class="h4 fw-bold mb-2">Freelance & Technical Service</h3>
+                    <p class="text-primary mb-2">Pengembangan Web dan Servis Laptop</p>
+                    <p class="text-soft mb-0">
+                      Membantu pengguna melalui pembuatan aplikasi sederhana,
+                      instalasi sistem, upgrade perangkat, dan penyelesaian masalah teknis.
+                    </p>
+                  </div>
+                  <span class="small font-monospace text-soft flex-shrink-0 mt-2 mt-md-0">2025 — SEKARANG</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="section-space bg-body-tertiary border-top border-soft">
+      <div class="container">
+        <div class="row g-5">
+          <div class="col-lg-4" data-aos="fade-right">
+            <span class="section-number">04 / PENDIDIKAN</span>
+            <h2 class="section-title fw-bold mt-3">Perjalanan belajar saya.</h2>
+          </div>
+
+          <div class="col-lg-8">
+            <div class="timeline ps-4" data-aos="fade-up">
+              <div class="timeline-item pb-5">
+                <div class="d-md-flex justify-content-between gap-4">
+                  <div>
+                    <h3 class="h4 fw-bold mb-2">D4 Teknologi Rekayasa Perangkat Lunak</h3>
+                    <p class="text-primary mb-2">Politeknik Wilmar Bisnis Indonesia</p>
+                    <p class="text-soft mb-0">
+                      Fokus pada pengembangan perangkat lunak, sistem informasi, 
+                      dan solusi teknologi untuk industri.
+                    </p>
+                  </div>
+                  <span class="small font-monospace text-soft flex-shrink-0 mt-2 mt-md-0">2025 — SEKARANG</span>
+                </div>
+              </div>
+
+              <div class="timeline-item pb-5">
+                <div class="d-md-flex justify-content-between gap-4">
+                  <div>
+                    <h3 class="h4 fw-bold mb-2">SMK Negeri 1 Percut Sei Tuan</h3>
+                    <p class="text-primary mb-2">Rekayasa Perangkat Lunak</p>
+                    <p class="text-soft mb-0">
+                      Mempelajari dasar-dasar pemrograman, database, web development, 
+                      dan pengembangan aplikasi desktop dan mobile.
+                    </p>
+                  </div>
+                  <span class="small font-monospace text-soft flex-shrink-0 mt-2 mt-md-0">2022 — 2025</span>
+                </div>
+              </div>
+
+              <div class="timeline-item pb-5">
+                <div class="d-md-flex justify-content-between gap-4">
+                  <div>
+                    <h3 class="h4 fw-bold mb-2">SMP Muhammadiyah 1 Medan</h3>
+                    <p class="text-primary mb-2">Sekolah Menengah Pertama</p>
+                    <p class="text-soft mb-0">
+                      Membangun fondasi akademik dan mulai tertarik pada teknologi 
+                      serta komputer.
+                    </p>
+                  </div>
+                  <span class="small font-monospace text-soft flex-shrink-0 mt-2 mt-md-0">2019 — 2022</span>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="d-md-flex justify-content-between gap-4">
+                  <div>
+                    <h3 class="h4 fw-bold mb-2">SD Muhammadiyah 07 Medan</h3>
+                    <p class="text-primary mb-2">Sekolah Dasar</p>
+                    <p class="text-soft mb-0">
+                      Memulai perjalanan pendidikan dengan pembelajaran dasar 
+                      dan pengembangan karakter.
+                    </p>
+                  </div>
+                  <span class="small font-monospace text-soft flex-shrink-0 mt-2 mt-md-0">2013 — 2019</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="section-space border-top border-soft">
+      <div class="container">
+        <div class="row g-5 align-items-start">
+          <div class="col-lg-5" data-aos="fade-right">
+            <span class="section-number">05 / KEAHLIAN</span>
+            <h2 class="section-title fw-bold mt-3">Teknologi yang saya gunakan.</h2>
+            <p class="text-soft mt-4">
+              Saya memilih teknologi berdasarkan kebutuhan proyek, bukan sekadar tren.
+            </p>
+          </div>
+
+          <div class="col-lg-7">
+            <div class="glass rounded-5 p-4 p-md-5" data-aos="fade-left">
+              <div class="mb-5">
+                <h3 class="h5 mb-3">Frontend & Mobile</h3>
+                <div class="d-flex flex-wrap gap-2">
+                  <span class="badge skill-badge rounded-pill px-3 py-2">
+                    <span class="tech-text">HTML</span>
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/html5.svg" class="tech-icon" alt="HTML5" style="filter: invert(1);">
+                  </span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">
+                    <span class="tech-text">CSS</span>
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/css3.svg" class="tech-icon" alt="CSS3" style="filter: invert(1);">
+                  </span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">
+                    <span class="tech-text">Bootstrap</span>
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/bootstrap.svg" class="tech-icon" alt="Bootstrap" style="filter: invert(1);">
+                  </span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">
+                    <span class="tech-text">JavaScript</span>
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/javascript.svg" class="tech-icon" alt="JavaScript" style="filter: invert(1);">
+                  </span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">
+                    <span class="tech-text">React</span>
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/react.svg" class="tech-icon" alt="React" style="filter: invert(1);">
+                  </span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">
+                    <span class="tech-text">Next.js</span>
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/nextdotjs.svg" class="tech-icon" alt="Next.js" style="filter: invert(1);">
+                  </span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">
+                    <span class="tech-text">Flutter</span>
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/flutter.svg" class="tech-icon" alt="Flutter" style="filter: invert(1);">
+                  </span>
+                </div>
+              </div>
+
+              <div class="mb-5">
+                <h3 class="h5 mb-3">Backend & Database</h3>
+                <div class="d-flex flex-wrap gap-2">
+                  <span class="badge skill-badge rounded-pill px-3 py-2">
+                    <span class="tech-text">Laravel</span>
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/laravel.svg" class="tech-icon" alt="Laravel" style="filter: invert(1);">
+                  </span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">
+                    <span class="tech-text">Node.js</span>
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/nodedotjs.svg" class="tech-icon" alt="Node.js" style="filter: invert(1);">
+                  </span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">
+                    <span class="tech-text">MySQL</span>
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/mysql.svg" class="tech-icon" alt="MySQL" style="filter: invert(1);">
+                  </span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">
+                    <span class="tech-text">SQLite</span>
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/sqlite.svg" class="tech-icon" alt="SQLite" style="filter: invert(1);">
+                  </span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">
+                    <span class="tech-text">Firebase</span>
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/firebase.svg" class="tech-icon" alt="Firebase" style="filter: invert(1);">
+                  </span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">
+                    <span class="tech-text">REST API</span>
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/fastapi.svg" class="tech-icon" alt="REST API" style="filter: invert(1);">
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                <h3 class="h5 mb-3">AI, IoT & Tools</h3>
+                <div class="d-flex flex-wrap gap-2">
+                  <span class="badge skill-badge rounded-pill px-3 py-2">
+                    <span class="tech-text">Python</span>
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/python.svg" class="tech-icon" alt="Python" style="filter: invert(1);">
+                  </span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">
+                    <span class="tech-text">OpenCV</span>
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/opencv.svg" class="tech-icon" alt="OpenCV" style="filter: invert(1);">
+                  </span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">
+                    <span class="tech-text">Scikit-learn</span>
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/scikitlearn.svg" class="tech-icon" alt="Scikit-learn" style="filter: invert(1);">
+                  </span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">
+                    <span class="tech-text">ESP32</span>
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/espressif.svg" class="tech-icon" alt="ESP32" style="filter: invert(1);">
+                  </span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">
+                    <span class="tech-text">Git</span>
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/git.svg" class="tech-icon" alt="Git" style="filter: invert(1);">
+                  </span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">
+                    <span class="tech-text">Linux</span>
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/linux.svg" class="tech-icon" alt="Linux" style="filter: invert(1);">
+                  </span>
+                  <span class="badge skill-badge rounded-pill px-3 py-2">
+                    <span class="tech-text">Figma</span>
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/figma.svg" class="tech-icon" alt="Figma" style="filter: invert(1);">
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section-space bg-body-tertiary border-top border-soft">
+      <div class="container">
+        <div class="contact-box glass rounded-5 p-4 p-md-5 p-lg-6 overflow-hidden">
+          <div class="row align-items-center g-5">
+            <div class="col-lg-8" data-aos="fade-right">
+              <span class="section-number">06 / KONTAK</span>
+              <h2 class="section-title fw-bold mt-3">Punya ide yang ingin diwujudkan?</h2>
+              <p class="lead text-soft mb-0">
+                Mari berdiskusi tentang proyek web, aplikasi, produk digital,
+                atau kolaborasi teknologi.
+              </p>
+            </div>
+
+            <div class="col-lg-4">
+              <div class="d-grid gap-3" data-aos="fade-left">
+                <a href="mailto:akbarriansyah339@gmail.com" class="btn btn-primary btn-lg rounded-pill">
+                  akbarriansyah339@gmail.com
+                </a>
+                <a href="#home" class="btn btn-outline-light btn-lg rounded-pill">
+                  Kembali ke Atas
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-top border-soft py-4">
+    <div class="container">
+      <div class="d-flex flex-column flex-md-row justify-content-between gap-2 text-soft small">
+        <span>© 2026 Akbar Riansyah. Dibangun dengan Bootstrap.</span>
+        <span>Design · Code · Build</span>
+      </div>
+    </div>
+  </footer>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"
+  ></script>
+  
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+      offset: 50
+    });
+  </script>
+
+  <!-- Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <script>
+    // Typing Animation
+    document.addEventListener('DOMContentLoaded', function() {
+      new Typed('#typed-text', {
+        strings: [
+          'produk digital',
+          'solusi teknologi',
+          'aplikasi modern',
+          'sistem cerdas'
+        ],
+        typeSpeed: 80,
+        backSpeed: 50,
+        backDelay: 2000,
+        startDelay: 500,
+        loop: true,
+        showCursor: true,
+        cursorChar: '|',
+        autoInsertCss: true,
+      });
+    });
+  </script>
+</body>
+</html>
