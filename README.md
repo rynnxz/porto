@@ -1,4 +1,4 @@
-# Portfolio — Akbar Riansyah
+# Portfolio - Akbar Riansyah
 
 Portfolio website pribadi yang menampilkan proyek, pengalaman, dan keahlian saya sebagai full-stack developer.
 
